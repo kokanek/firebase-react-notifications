@@ -13,43 +13,27 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
-export const getToken = () => {
+export const getToken = (setTokenFound) => {
   return messaging.getToken({vapidKey: 'BH97plGjFleE6fvFuH_08jfyKG4GTXlZg4tdUcUAwwjOjL0xSPoKAdruBMhW0Qw9G6f7UvaL6yr1VyNbkUvjj8I'}).then((currentToken) => {
     if (currentToken) {
-      console.log('current token: ', currentToken);
-      // sendTokenToServer(currentToken);
-      // updateUIForPushEnabled(currentToken);
+      console.log('current token for client: ', currentToken);
+      setTokenFound(true);
+      // Track the token -> client mapping, by sending to backend server
+      // show on the UI that permission is secured
     } else {
-      // Show permission request.
       console.log('No registration token available. Request permission to generate one.');
-      // Show permission UI.
-      // updateUIForPushPermissionRequired();
-      // setTokenSentToServer(false);
+      setTokenFound(false);
+      // shows on the UI that permission is required 
     }
   }).catch((err) => {
     console.log('An error occurred while retrieving token. ', err);
-    // showToken('Error retrieving registration token. ', err);
-    // setTokenSentToServer(false);
+    // catch error while creating client token
   });
 }
-
-export const requestFirebaseNotificationPermission = () =>
-  new Promise((resolve, reject) => {
-    messaging
-      .requestPermission()
-      .then(() => messaging.getToken())
-      .then((firebaseToken) => {
-        resolve(firebaseToken);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
 
 export const onMessageListener = () =>
   new Promise((resolve) => {
     messaging.onMessage((payload) => {
-      alert(JSON.stringify(payload));
       resolve(payload);
     });
 });
