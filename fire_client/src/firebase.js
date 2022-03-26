@@ -2,19 +2,19 @@ import firebase from 'firebase/app';
 import 'firebase/messaging';
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBXAFWdnCz5SNYKJVXUC01Y70DhYgAgSqo",
-  authDomain: "storemax-50908.firebaseapp.com",
-  projectId: "storemax-50908",
-  storageBucket: "storemax-50908.appspot.com",
-  messagingSenderId: "606599051782",
-  appId: "1:606599051782:web:e53a0dfd668450c729a187"
+  apiKey: "AIzaSyAjWIJe9AaL6fDZVn9tRajF-BUexEPFZyA",
+  authDomain: "react-notif-40228.firebaseapp.com",
+  projectId: "react-notif-40228",
+  storageBucket: "react-notif-40228.appspot.com",
+  messagingSenderId: "790644971731",
+  appId: "1:790644971731:web:dc0c5d007d2b961af3dc26"
 };
 
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 export const getToken = (setTokenFound) => {
-  return messaging.getToken({vapidKey: 'BH97plGjFleE6fvFuH_08jfyKG4GTXlZg4tdUcUAwwjOjL0xSPoKAdruBMhW0Qw9G6f7UvaL6yr1VyNbkUvjj8I'}).then((currentToken) => {
+  return messaging.getToken({vapidKey: 'BHGPr3pJQSflJAJtTIVXbmcEXlPV_HP29TZQRcqrGCN10gKIa-ojIJmtvM9kQGcsNKsWIA6ezKFG8Bd6LTjaVc0'}).then((currentToken) => {
     if (currentToken) {
       console.log('current token for client: ', currentToken);
       setTokenFound(true);

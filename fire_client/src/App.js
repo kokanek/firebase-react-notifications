@@ -13,10 +13,15 @@ function App() {
   getToken(setTokenFound);
 
   onMessageListener().then(payload => {
-    setShow(true);
     setNotification({title: payload.notification.title, body: payload.notification.body})
+    setShow(true);
     console.log(payload);
   }).catch(err => console.log('failed: ', err));
+
+  const onShowNotificationClicked = () => {
+    setNotification({title: "Notification", body: "This is a test notification"})
+    setShow(true);
+  }
 
   return (
     <div className="App">
@@ -41,7 +46,7 @@ function App() {
         {isTokenFound && <h1> Notification permission enabled 👍🏻 </h1>}
         {!isTokenFound && <h1> Need notification permission ❗️ </h1>}
         <img src={logo} className="App-logo" alt="logo" />
-        <Button onClick={() => setShow(true)}>Show Toast</Button>
+        <Button onClick={() => onShowNotificationClicked()}>Show Toast</Button>
       </header>
       
     </div>
